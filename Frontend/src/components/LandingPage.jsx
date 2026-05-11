@@ -213,20 +213,21 @@ const LandingPage = () => {
 
       {/* ── STATS ── */}
       <div style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0', padding: '0 60px' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px' }}>
           {[
             { value: '4', label: 'User Roles', sub: 'Student, Supervisor, Admin' },
             { value: '4', label: 'Log Stages', sub: 'Draft → Approved' },
             { value: '100%', label: 'Web Based', sub: 'No installation needed' },
             { value: '∞', label: 'Weekly Logs', sub: 'Unlimited submissions' },
-          ].map((s, i) => (
-            <div key={i} style={{
-              padding: '40px 20px', textAlign: 'center',
-              borderRight: i < 3 ? '1px solid #e2e8f0' : 'none',
+          ].map((s) => (
+            <div key={s.label} style={{
+              padding: '28px 26px', textAlign: 'center',
+              background: 'white', borderRadius: '24px', boxShadow: '0 18px 50px rgba(15,23,42,0.06)',
+              border: '1px solid #e2e8f0',
             }}>
-              <div style={{ fontSize: '40px', fontWeight: '900', color: '#6366f1', letterSpacing: '-1px' }}>{s.value}</div>
-              <div style={{ fontSize: '16px', fontWeight: '700', color: '#0f172a', marginTop: '4px' }}>{s.label}</div>
-              <div style={{ fontSize: '13px', color: '#94a3b8', marginTop: '4px' }}>{s.sub}</div>
+              <div style={{ fontSize: '36px', fontWeight: '900', color: '#6366f1', letterSpacing: '-1px' }}>{s.value}</div>
+              <div style={{ fontSize: '15px', fontWeight: '700', color: '#0f172a', marginTop: '10px' }}>{s.label}</div>
+              <div style={{ fontSize: '13px', color: '#64748b', marginTop: '8px' }}>{s.sub}</div>
             </div>
           ))}
         </div>
