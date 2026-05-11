@@ -6,6 +6,16 @@ const BASE = 'http://localhost:8000/api';
 
 export const useAuth = () => useContext(AuthContext);
 
+export const getDashboardPath = (role) => {
+  switch (role) {
+    case 'work_supervisor':
+    case 'university_supervisor': return '/supervisor/dashboard';
+    case 'student': return '/student/dashboard';
+    case 'admin': return '/admin/dashboard';
+    default: return '/';
+  }
+};
+
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -54,17 +64,6 @@ export const AuthProvider = ({ children }) => {
     } catch {
       logout();
       return null;
-    }
-  };
-
-  // Helper: get the correct dashboard path for a role
-  const getDashboardPath = (role) => {
-    switch (role) {
-      case 'work_supervisor':
-      case 'university_supervisor': return '/supervisor/dashboard';
-      case 'student': return '/student/dashboard';
-      case 'admin': return '/admin/dashboard';
-      default: return '/';
     }
   };
 

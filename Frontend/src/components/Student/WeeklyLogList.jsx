@@ -1,32 +1,32 @@
 import React from 'react';
 
+export const getStatusStyle = (status) => {
+  const base = { padding: '6px 14px', borderRadius: '999px', fontSize: '12px', fontWeight: '700', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' };
+  switch (status) {
+    case 'draft':
+      return { ...base, backgroundColor: '#e2e8f0', color: '#334155' };
+    case 'submitted':
+      return { ...base, backgroundColor: '#fef3c7', color: '#92400e' };
+    case 'reviewed':
+      return { ...base, backgroundColor: '#dbeafe', color: '#1d4ed8' };
+    case 'approved':
+      return { ...base, backgroundColor: '#dcfce7', color: '#166534' };
+    default:
+      return base;
+  }
+};
+
+export const getStatusText = (status) => {
+  switch (status) {
+    case 'draft': return 'Draft';
+    case 'submitted': return 'Submitted';
+    case 'reviewed': return 'Reviewed';
+    case 'approved': return 'Approved ✓';
+    default: return status;
+  }
+};
+
 const WeeklyLogList = ({ logs, onEdit, onSubmit }) => {
-  const getStatusStyle = (status) => {
-    const base = { padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 'bold', display: 'inline-block' };
-    switch (status) {
-      case 'draft':
-        return { ...base, backgroundColor: '#e0e0e0', color: '#666' };
-      case 'submitted':
-        return { ...base, backgroundColor: '#fff3cd', color: '#856404' };
-      case 'reviewed':
-        return { ...base, backgroundColor: '#cfe2ff', color: '#084298' };
-      case 'approved':
-        return { ...base, backgroundColor: '#d4edda', color: '#155724' };
-      default:
-        return base;
-    }
-  };
-
-  const getStatusText = (status) => {
-    switch (status) {
-      case 'draft': return 'Draft';
-      case 'submitted': return 'Submitted';
-      case 'reviewed': return 'Reviewed';
-      case 'approved': return 'Approved ✓';
-      default: return status;
-    }
-  };
-
   const styles = {
     table: {
       width: '100%',
@@ -54,23 +54,25 @@ const WeeklyLogList = ({ logs, onEdit, onSubmit }) => {
       fontSize: '14px',
     },
     buttonEdit: {
-      backgroundColor: '#6c757d',
+      background: 'linear-gradient(135deg, #6b7280, #4b5563)',
       color: 'white',
-      padding: '6px 12px',
+      padding: '8px 14px',
       border: 'none',
-      borderRadius: '6px',
+      borderRadius: '999px',
       cursor: 'pointer',
       marginRight: '8px',
       fontSize: '12px',
+      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
     },
     buttonSubmit: {
-      backgroundColor: '#28a745',
+      background: 'linear-gradient(135deg, #16a34a, #22c55e)',
       color: 'white',
-      padding: '6px 12px',
+      padding: '8px 14px',
       border: 'none',
-      borderRadius: '6px',
+      borderRadius: '999px',
       cursor: 'pointer',
       fontSize: '12px',
+      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
     },
     feedbackText: {
       fontSize: '12px',
