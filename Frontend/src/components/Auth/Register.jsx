@@ -112,14 +112,14 @@ const Register = () => {
           {/* Username */}
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#374151', marginBottom: '6px' }}>Username *</label>
-            <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="johndoe" required {...inp('username')} />
+            <input type="text" name="username" value={formData.username} onChange={handleChange} placeholder="Enter your username" required {...inp('username')} />
             {errors.username && <div style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px' }}>{errors.username}</div>}
           </div>
 
           {/* Email */}
           <div style={{ marginBottom: '16px' }}>
             <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#374151', marginBottom: '6px' }}>Email *</label>
-            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="you@example.com" required {...inp('email')} />
+            <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="name@example.com" required {...inp('email')} />
             {errors.email && <div style={{ color: '#ef4444', fontSize: '12px', marginTop: '4px' }}>{errors.email}</div>}
           </div>
 
