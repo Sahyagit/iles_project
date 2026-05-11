@@ -69,12 +69,12 @@ const Register = () => {
   return (
     <div style={{
       minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-      background: 'linear-gradient(135deg, #0f0c29 0%, #1e1b4b 50%, #0f0c29 100%)',
+      background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
       padding: '20px', fontFamily: "'Inter','Segoe UI',sans-serif",
     }}>
       <div style={{
-        background: 'white', borderRadius: '24px', width: '100%', maxWidth: '520px',
-        padding: '40px', boxShadow: '0 24px 64px rgba(0,0,0,0.3)',
+        background: 'rgba(255,255,255,0.98)', borderRadius: '28px', width: '100%', maxWidth: '520px',
+        padding: '44px', boxShadow: '0 24px 70px rgba(15,23,42,0.14)', border: '1px solid rgba(15,23,42,0.08)',
       }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
