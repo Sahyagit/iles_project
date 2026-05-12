@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+// In production nginx proxies /api/ to backend
+// In development it points to localhost:8000
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -33,7 +35,6 @@ api.interceptors.response.use(
           original.headers.Authorization = `Bearer ${newAccess}`;
           return api(original);
         } catch {
-          // Refresh failed — clear storage and redirect to login
           localStorage.clear();
           window.location.href = '/login';
         }
