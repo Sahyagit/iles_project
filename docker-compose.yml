@@ -1,0 +1,67 @@
+version: '3.9'
+
+services:
+
+  # ── PostgreSQL Database ──────────────────────────────────────────────────────
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-iles_db}
+      POSTGRES_USER: ${DB_USER:-iles_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-iles_password}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - iles_network
+
+  # ── Django Backend ───────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: unless-stopped
+    environment:
+      - DEBUG=False
+      - SECRET_KEY=${SECRET_KEY}
+      - DB_NAME=${DB_NAME:-iles_db}
+      - DB_USER=${DB_USER:-iles_user}
+      - DB_PASSWORD=${DB_PASSWORD:-iles_password}
+      - DB_HOST=db
+      - DB_PORT=5432
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-69.164.245.17,localhost}
+      - CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS:-http://69.164.245.17}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+      - FRONTEND_URL=${FRONTEND_URL:-http://69.164.245.17}
+    depends_on:
+      - db
+    volumes:
+      - static_files:/app/staticfiles
+    networks:
+      - iles_network
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             gunicorn iles_backend.wsgi:application --bind 0.0.0.0:8000 --workers 3"
+
+  # ── React Frontend ───────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - iles_network
+
+volumes:
+  postgres_data:
+  static_files:
+
+networks:
+  iles_network:
+    driver: bridge
