@@ -29,3 +29,10 @@
 - As an academic supervisor, I want to mark a log as “approved” after confirming that both workplace requirements and academic expectations are met.
 - As an academic supervisor, I want to generate a final report for a student at the end of the internship so that I can assign a grade.
 
+## Administrator
+- As an administrator, I want to create and manage user accounts so that only authorised people access the system.
+- As an administrator, I want to assign workplace supervisors and academic supervisors to students so that each student has the correct oversight.
+- As an administrator, I want to create internship placement records so that students are linked to their company, workplace supervisor, and academic supervisor.
+- As an administrator, I want to view all logs and placements in the system so that I can monitor overall progress.
+- As an administrator, I want to generate reports (e.g., number of logs per student, approval rates per supervisor) so that I can evaluate the internship programme.
+- As an administrator, I want to reset passwords and manage user roles so that security is maintained.
