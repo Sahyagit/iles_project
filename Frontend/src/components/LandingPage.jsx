@@ -11,9 +11,12 @@ const LandingPage = () => {
 
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   useEffect(() => {
+    featureInterval.current = setInterval(() => {
       setActiveFeature(prev => (prev + 1) % features.length);
     }, 3000);
     return () => clearInterval(featureInterval.current);
