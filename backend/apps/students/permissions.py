@@ -13,5 +13,4 @@ class IsAdminOrReadOnly(BasePermission):
             return False
         if request.method in SAFE_METHODS:
             return True
-        # Allow if user explicitly has the 'admin' role or is a Django superuser
-        return getattr(user, 'role', None) == 'admin' or getattr(user, 'is_superuser', False)
+        return getattr(user, 'role', None) == 'admin'
