@@ -53,7 +53,10 @@ class RegisterView(APIView):
         if serializer.is_valid():
             plain_password = request.data.get('password')
             user = serializer.save()
-            send_credentials_email(user, plain_password)
+            try:
+                send_credentials_email(user, plain_password)
+            except Exception:
+                pass  # Email failure must not block registration
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -201,5 +204,8 @@ class ForgotPasswordView(APIView):
         new_password = get_random_string(length=10)
         user.set_password(new_password)
         user.save()
-        send_credentials_email(user, new_password)
+        try:
+            send_credentials_email(user, new_password)
+        except Exception:
+            pass
         return Response({'detail': 'New credentials have been sent to your email.'})
