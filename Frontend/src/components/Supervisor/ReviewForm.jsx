@@ -83,7 +83,7 @@ const ReviewForm = ({ log, onClose, onUpdated }) => {
     }} onClick={onClose}>
       <div style={{
         background: 'white', borderRadius: '20px', width: '100%', maxWidth: '640px',
-        maxHeight: '90vh', overflowY: 'auto', padding: '32px',
+        maxHeight: '90vh', overflowY: 'auto', padding: 'clamp(16px, 4vw, 32px)',
         boxShadow: '0 24px 64px rgba(0,0,0,0.2)',
       }} onClick={e => e.stopPropagation()}>
 
