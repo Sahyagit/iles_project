@@ -38,7 +38,7 @@ const LogList = ({ logs, onSelectLog }) => {
 
       {/* Table */}
       <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <table className="responsive-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr style={{ background: '#f8fafc' }}>
               {['Student', 'Week', 'Submitted', 'Status', 'Feedback', 'Action'].map(h => (
@@ -56,35 +56,23 @@ const LogList = ({ logs, onSelectLog }) => {
                 onMouseEnter={e => e.currentTarget.style.background = '#f0f4ff'}
                 onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? 'white' : '#fafafa'}
               >
-                <td style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9' }}>
+                <td data-label="Student" style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9' }}>
                   <div style={{ fontWeight: '600', color: '#0f172a', fontSize: '14px' }}>{log.student.full_name}</div>
                   <div style={{ fontSize: '12px', color: '#6366f1' }}>{log.student.company_name}</div>
                   <div style={{ fontSize: '12px', color: '#94a3b8' }}>{log.student.email}</div>
                 </td>
-                <td style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', fontWeight: '600', color: '#334155' }}>
-                  Week {log.week_number}
-                </td>
-                <td style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', fontSize: '13px', color: '#64748b' }}>
+                <td data-label="Week" style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', fontWeight: '600', color: '#334155' }}>Week {log.week_number}</td>
+                <td data-label="Submitted" style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', fontSize: '13px', color: '#64748b' }}>
                   {log.submitted_at ? new Date(log.submitted_at).toLocaleDateString() : '—'}
                 </td>
-                <td style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9' }}>
+                <td data-label="Status" style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9' }}>
                   <StatusBadge status={log.status} />
                 </td>
-                <td style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', fontSize: '13px', color: '#64748b' }}>
+                <td data-label="Feedback" style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9', fontSize: '13px', color: '#64748b' }}>
                   {log.feedback?.length > 0 ? `${log.feedback.length} comment(s)` : 'None'}
                 </td>
-                <td style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9' }}>
-                  <button
-                    onClick={() => onSelectLog(log)}
-                    style={{
-                      background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-                      color: 'white', border: 'none', padding: '7px 16px',
-                      borderRadius: '8px', fontSize: '13px', fontWeight: '600',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Review →
-                  </button>
+                <td data-label="Action" style={{ padding: '14px 16px', borderBottom: '1px solid #f1f5f9' }}>
+                  <button onClick={() => onSelectLog(log)} style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', border: 'none', padding: '7px 16px', borderRadius: '8px', fontSize: '13px', fontWeight: '600', cursor: 'pointer' }}>Review →</button>
                 </td>
               </tr>
             ))}
