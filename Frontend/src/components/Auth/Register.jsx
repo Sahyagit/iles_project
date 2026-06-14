@@ -6,7 +6,6 @@ const ROLES = [
   { value: 'student', label: '🎓 Student Intern' },
   { value: 'work_supervisor', label: '🏢 Workplace Supervisor' },
   { value: 'university_supervisor', label: '📚 Academic Supervisor' },
-  { value: 'admin', label: '🛡️ Administrator' },
 ];
 
 const Register = () => {
