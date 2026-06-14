@@ -13,6 +13,13 @@ const UserFormModal = ({ user, onClose, onSave }) => {
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 480);
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 480);
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -96,7 +103,7 @@ const UserFormModal = ({ user, onClose, onSave }) => {
       maxWidth: '550px',
       maxHeight: '90vh',
       overflow: 'auto',
-      padding: '30px',
+      padding: isMobile ? '20px' : '30px',
     },
     header: {
       display: 'flex',
@@ -189,7 +196,7 @@ const UserFormModal = ({ user, onClose, onSave }) => {
             <input type="email" name="email" value={formData.email} onChange={handleChange} style={styles.input} />
             {errors.email && <div style={styles.error}>{errors.email}</div>}
           </div>
-          <div style={{ display: 'flex', gap: '10px' }}>
+          <div style={{ display: 'flex', gap: '10px', flexDirection: isMobile ? 'column' : 'row' }}>
             <div style={{ flex: 1 }}>
               <label style={styles.label}>First Name *</label>
               <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} style={styles.input} />
