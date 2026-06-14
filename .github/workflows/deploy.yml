@@ -23,7 +23,10 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             cd /opt/iles_project
-            git pull origin main
-            docker-compose up -d --build
+            git fetch origin main
+            git reset --hard origin/main
+            docker-compose down
+            docker-compose build --no-cache
+            docker-compose up -d
             docker-compose exec -T backend python manage.py migrate
             echo "✅ ILES deployed successfully!"
