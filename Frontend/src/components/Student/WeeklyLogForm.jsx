@@ -51,7 +51,7 @@ const WeeklyLogForm = ({ log, onClose, onSuccess }) => {
   return (
     <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000, padding: '20px' }}
       onClick={onClose}>
-      <div style={{ background: 'white', borderRadius: '20px', width: '100%', maxWidth: '580px', maxHeight: '90vh', overflowY: 'auto', padding: '32px', boxShadow: '0 24px 64px rgba(0,0,0,0.2)' }}
+      <div style={{ background: 'white', borderRadius: '20px', width: '100%', maxWidth: '580px', maxHeight: '90vh', overflowY: 'auto', padding: 'clamp(16px, 4vw, 32px)', boxShadow: '0 24px 64px rgba(0,0,0,0.2)' }}
         onClick={e => e.stopPropagation()}>
 
         {/* Header */}
