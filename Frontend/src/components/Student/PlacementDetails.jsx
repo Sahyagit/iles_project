@@ -1,3 +1,6 @@
+huhu
+juhgy
+hey
 import React from 'react';
 
 const PlacementDetails = ({ placement }) => {
