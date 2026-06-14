@@ -60,7 +60,7 @@ const UserList = ({ users, onAdd, onEdit, onDelete }) => {
         </div>
       ) : (
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <table className="responsive-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr>
                 {['Username', 'Full Name', 'Email', 'Role', 'Status', 'Actions'].map(h => (
@@ -75,21 +75,23 @@ const UserList = ({ users, onAdd, onEdit, onDelete }) => {
                   onMouseEnter={e => e.currentTarget.style.background = '#f0f4ff'}
                   onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? 'white' : '#fafafa'}
                 >
-                  <td style={td}><strong>{u.username}</strong></td>
-                  <td style={td}>{u.first_name} {u.last_name}</td>
-                  <td style={td}>{u.email}</td>
-                  <td style={td}><span style={getRoleBadge(u.role)}>{u.role.replace(/_/g, ' ')}</span></td>
-                  <td style={td}>{u.is_active ? <span style={{ color: '#16a34a', fontWeight: '600' }}>✅ Active</span> : <span style={{ color: '#dc2626', fontWeight: '600' }}>❌ Inactive</span>}</td>
-                  <td style={td}>
-                    <button onClick={() => onEdit(u)} style={{ background: '#fef9c3', color: '#854d0e', border: 'none', padding: '5px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: '600', marginRight: '6px' }}>✏️ Edit</button>
-                    <button onClick={async () => {
-                      if (!window.confirm(`Reset password for ${u.username}? A new password will be emailed to them.`)) return;
-                      try {
-                        const res = await resetUserPassword(u.id);
-                        alert(res.data.email_sent ? `✅ Password reset and emailed to ${u.email}` : `⚠️ Password reset. New password: ${res.data.new_password}`);
-                      } catch { alert('Failed to reset password.'); }
-                    }} style={{ background: '#dbeafe', color: '#1e40af', border: 'none', padding: '5px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: '600', marginRight: '6px' }}>🔑 Reset</button>
-                    <button onClick={() => onDelete(u.id)} style={{ background: '#fce7f3', color: '#9d174d', border: 'none', padding: '5px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: '600' }}>🗑️ Delete</button>
+                  <td style={td} data-label="Username"><strong>{u.username}</strong></td>
+                  <td style={td} data-label="Full Name">{u.first_name} {u.last_name}</td>
+                  <td style={td} data-label="Email">{u.email}</td>
+                  <td style={td} data-label="Role"><span style={getRoleBadge(u.role)}>{u.role.replace(/_/g, ' ')}</span></td>
+                  <td style={td} data-label="Status">{u.is_active ? <span style={{ color: '#16a34a', fontWeight: '600' }}>✅ Active</span> : <span style={{ color: '#dc2626', fontWeight: '600' }}>❌ Inactive</span>}</td>
+                  <td style={td} data-label="Actions">
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                      <button onClick={() => onEdit(u)} style={{ background: '#fef9c3', color: '#854d0e', border: 'none', padding: '5px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: '600' }}>✏️ Edit</button>
+                      <button onClick={async () => {
+                        if (!window.confirm(`Reset password for ${u.username}? A new password will be emailed to them.`)) return;
+                        try {
+                          const res = await resetUserPassword(u.id);
+                          alert(res.data.email_sent ? `✅ Password reset and emailed to ${u.email}` : `⚠️ Password reset. New password: ${res.data.new_password}`);
+                        } catch { alert('Failed to reset password.'); }
+                      }} style={{ background: '#dbeafe', color: '#1e40af', border: 'none', padding: '5px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: '600' }}>🔑 Reset</button>
+                      <button onClick={() => onDelete(u.id)} style={{ background: '#fce7f3', color: '#9d174d', border: 'none', padding: '5px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: '600' }}>🗑️ Del</button>
+                    </div>
                   </td>
                 </tr>
               ))}
