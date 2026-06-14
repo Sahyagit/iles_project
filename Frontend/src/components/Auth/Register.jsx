@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
@@ -19,6 +19,13 @@ const Register = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [focusedField, setFocusedField] = useState('');
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 480);
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 480);
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -74,7 +81,7 @@ const Register = () => {
     }}>
       <div style={{
         background: 'rgba(255,255,255,0.98)', borderRadius: '28px', width: '100%', maxWidth: '520px',
-        padding: '44px', boxShadow: '0 24px 70px rgba(15,23,42,0.14)', border: '1px solid rgba(15,23,42,0.08)',
+        padding: isMobile ? '28px 20px' : '44px', boxShadow: '0 24px 70px rgba(15,23,42,0.14)', border: '1px solid rgba(15,23,42,0.08)',
       }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
@@ -96,7 +103,7 @@ const Register = () => {
 
         <form onSubmit={handleSubmit}>
           {/* Name row */}
-          <div style={{ display: 'flex', gap: '12px', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', gap: '12px', marginBottom: '16px', flexDirection: isMobile ? 'column' : 'row' }}>
             <div style={{ flex: 1 }}>
               <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#374151', marginBottom: '6px' }}>First Name *</label>
               <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} placeholder="John" required {...inp('first_name')} />
@@ -150,7 +157,7 @@ const Register = () => {
           </div>
 
           {/* Passwords */}
-          <div style={{ display: 'flex', gap: '12px', marginBottom: '24px' }}>
+          <div style={{ display: 'flex', gap: '12px', marginBottom: '24px', flexDirection: isMobile ? 'column' : 'row' }}>
             <div style={{ flex: 1 }}>
               <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#374151', marginBottom: '6px' }}>Password *</label>
               <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="••••••••" required {...inp('password')} />
