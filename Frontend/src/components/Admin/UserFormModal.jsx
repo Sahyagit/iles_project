@@ -212,9 +212,9 @@ const UserFormModal = ({ user, onClose, onSave }) => {
             <label style={styles.label}>Role *</label>
             <select name="role" value={formData.role} onChange={handleChange} style={styles.select}>
               <option value="student">Student</option>
-              <option value="workplace_supervisor">Workplace Supervisor</option>
-              <option value="academic_supervisor">Academic Supervisor</option>
-              <option value="administrator">Administrator</option>
+              <option value="work_supervisor">Workplace Supervisor</option>
+              <option value="university_supervisor">Academic Supervisor</option>
+              <option value="admin">Administrator</option>
             </select>
           </div>
           <div style={styles.formGroup}>
