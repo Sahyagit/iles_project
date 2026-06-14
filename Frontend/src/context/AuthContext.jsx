@@ -1,8 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
+import api from '../services/api';
 
 const AuthContext = createContext();
-const BASE = 'http://localhost:8000/api';
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -27,14 +26,12 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (username, password) => {
-    const res = await axios.post(`${BASE}/token/`, { username, password });
+    const res = await api.post('/token/', { username, password });
     const { access, refresh } = res.data;
     localStorage.setItem('access_token', access);
     localStorage.setItem('refresh_token', refresh);
 
-    const profileRes = await axios.get(`${BASE}/users/me/`, {
-      headers: { Authorization: `Bearer ${access}` },
-    });
+    const profileRes = await api.get('/users/me/');
     const userData = profileRes.data;
     localStorage.setItem('user', JSON.stringify(userData));
     setUser(userData);
@@ -42,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (formData) => {
-    const res = await axios.post(`${BASE}/users/register/`, formData);
+    const res = await api.post('/users/register/', formData);
     return res.data;
   };
 
@@ -58,7 +55,7 @@ export const AuthProvider = ({ children }) => {
     const refresh = localStorage.getItem('refresh_token');
     if (!refresh) { logout(); return null; }
     try {
-      const res = await axios.post(`${BASE}/token/refresh/`, { refresh });
+      const res = await api.post('/token/refresh/', { refresh });
       localStorage.setItem('access_token', res.data.access);
       return res.data.access;
     } catch {
