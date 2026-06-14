@@ -32,6 +32,8 @@ class RegisterSerializer(serializers.ModelSerializer):
         valid_roles = [r[0] for r in User.ROLE_CHOICES]
         if role not in valid_roles:
             raise serializers.ValidationError(f'Invalid role. Choose from: {valid_roles}')
+        if role == 'admin':
+            raise serializers.ValidationError('Admin accounts cannot be self-registered.')
         return role
 
     def create(self, validated_data):
