@@ -11,6 +11,13 @@ const PlacementFormModal = ({ placement, students, supervisors, onClose, onSave 
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 480);
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 480);
+    window.addEventListener('resize', handler);
+    return () => window.removeEventListener('resize', handler);
+  }, []);
 
   useEffect(() => {
     if (placement) {
@@ -195,7 +202,7 @@ const PlacementFormModal = ({ placement, students, supervisors, onClose, onSave 
               ))}
             </select>
           </div>
-          <div style={{ display: 'flex', gap: '10px' }}>
+          <div style={{ display: 'flex', gap: '10px', flexDirection: isMobile ? 'column' : 'row' }}>
             <div style={{ flex: 1 }}>
               <label style={styles.label}>Start Date *</label>
               <input type="date" name="start_date" value={formData.start_date} onChange={handleChange} style={styles.input} />
