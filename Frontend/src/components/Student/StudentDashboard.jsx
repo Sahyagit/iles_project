@@ -202,7 +202,7 @@ const StudentDashboard = () => {
 
     return (
       <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <table className="responsive-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
           <thead>
             <tr>{['Week', 'Content Preview', 'Status', 'Submitted', 'Actions'].map(h => <th key={h} style={th}>{h}</th>)}</tr>
           </thead>
@@ -213,11 +213,11 @@ const StudentDashboard = () => {
                 onMouseEnter={e => e.currentTarget.style.background = '#f0f4ff'}
                 onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? 'white' : '#fafafa'}
               >
-                <td style={td}><strong>Week {log.week_number}</strong></td>
-                <td style={td}>{log.content?.substring(0, 80)}...</td>
-                <td style={td}><StatusBadge status={log.status} /></td>
-                <td style={{ ...td, color: '#94a3b8' }}>{log.submitted_at ? new Date(log.submitted_at).toLocaleDateString() : '—'}</td>
-                <td style={td}>
+                <td data-label="Week" style={td}><strong>Week {log.week_number}</strong></td>
+                <td data-label="Content" style={td}>{log.content?.substring(0, 80)}...</td>
+                <td data-label="Status" style={td}><StatusBadge status={log.status} /></td>
+                <td data-label="Submitted" style={{ ...td, color: '#94a3b8' }}>{log.submitted_at ? new Date(log.submitted_at).toLocaleDateString() : '—'}</td>
+                <td data-label="Actions" style={td}>
                   {log.status === 'draft' && (
                     <>
                       <button onClick={() => { setEditingLog(log); setShowForm(true); }} style={{ background: '#fef9c3', color: '#854d0e', border: 'none', padding: '5px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: '600', marginRight: '6px' }}>✏️ Edit</button>
