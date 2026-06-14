@@ -36,7 +36,7 @@ const PlacementList = ({ placements, onAdd, onEdit, onDelete }) => {
         </div>
       ) : (
         <div style={{ overflowX: 'auto' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <table className="responsive-table" style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
               <tr>{['Student', 'Company', 'Workplace Supervisor', 'Academic Supervisor', 'Period', 'Actions'].map(h => <th key={h} style={th}>{h}</th>)}</tr>
             </thead>
@@ -47,14 +47,16 @@ const PlacementList = ({ placements, onAdd, onEdit, onDelete }) => {
                   onMouseEnter={e => e.currentTarget.style.background = '#f0fdf4'}
                   onMouseLeave={e => e.currentTarget.style.background = i % 2 === 0 ? 'white' : '#fafafa'}
                 >
-                  <td style={td}><strong>{p.student?.name || p.student_name}</strong></td>
-                  <td style={td}>{p.company_name}</td>
-                  <td style={td}>{p.workplace_supervisor?.name || p.workplace_supervisor_name || '—'}</td>
-                  <td style={td}>{p.academic_supervisor?.name || p.academic_supervisor_name || '—'}</td>
-                  <td style={{ ...td, fontSize: '12px', color: '#64748b' }}>{p.start_date} → {p.end_date}</td>
-                  <td style={td}>
-                    <button onClick={() => onEdit(p)} style={{ background: '#fef9c3', color: '#854d0e', border: 'none', padding: '5px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: '600', marginRight: '6px' }}>✏️ Edit</button>
-                    <button onClick={() => onDelete(p.id)} style={{ background: '#fce7f3', color: '#9d174d', border: 'none', padding: '5px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: '600' }}>🗑️ Delete</button>
+                  <td style={td} data-label="Student"><strong>{p.student?.name || p.student_name}</strong></td>
+                  <td style={td} data-label="Company">{p.company_name}</td>
+                  <td style={td} data-label="Work Supervisor">{p.workplace_supervisor?.name || p.workplace_supervisor_name || '—'}</td>
+                  <td style={td} data-label="Academic Supervisor">{p.academic_supervisor?.name || p.academic_supervisor_name || '—'}</td>
+                  <td style={{ ...td, fontSize: '12px', color: '#64748b' }} data-label="Period">{p.start_date} → {p.end_date}</td>
+                  <td style={td} data-label="Actions">
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                      <button onClick={() => onEdit(p)} style={{ background: '#fef9c3', color: '#854d0e', border: 'none', padding: '5px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: '600' }}>✏️ Edit</button>
+                      <button onClick={() => onDelete(p.id)} style={{ background: '#fce7f3', color: '#9d174d', border: 'none', padding: '5px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: '600' }}>🗑️ Del</button>
+                    </div>
                   </td>
                 </tr>
               ))}
