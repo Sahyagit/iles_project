@@ -52,8 +52,10 @@ const Register = () => {
       const data = err.response?.data;
       if (data && typeof data === 'object') {
         setErrors(data);
+      } else if (err.response?.status === 500) {
+        setErrors({ general: 'Server error. Please try again or contact support.' });
       } else {
-        setErrors({ general: 'Registration failed. Please try again.' });
+        setErrors({ general: 'Registration failed. Please check your details and try again.' });
       }
     } finally {
       setLoading(false);
