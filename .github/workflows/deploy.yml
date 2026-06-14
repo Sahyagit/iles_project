@@ -26,7 +26,7 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             docker-compose down
-            docker-compose build --no-cache
+            docker-compose build --no-cache --build-arg CACHEBUST=$(date +%s)
             docker-compose up -d
             docker-compose exec -T backend python manage.py migrate
             echo "✅ ILES deployed successfully!"
