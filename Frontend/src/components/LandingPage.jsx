@@ -37,7 +37,7 @@ const LandingPage = () => {
   ];
 
   const workflow = [
-    { step: '01', title: 'Student Submits', desc: 'Student writes and submits a weekly log entry for review.', icon: '✍️', color: '#6366f1' },
+    { step: '01', title: 'Student Submits', desc: 'Student writes and submits his weekly log entry for review.', icon: '✍️', color: '#6366f1' },
     { step: '02', title: 'Workplace Reviews', desc: 'Workplace supervisor reads, comments, and marks as reviewed.', icon: '👁️', color: '#0ea5e9' },
     { step: '03', title: 'Academic Approves', desc: 'Academic supervisor gives final approval, locking the log.', icon: '✅', color: '#10b981' },
     { step: '04', title: 'Admin Oversees', desc: 'Admin manages users, placements, and generates reports.', icon: '🛡️', color: '#f59e0b' },
