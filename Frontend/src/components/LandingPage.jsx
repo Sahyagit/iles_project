@@ -44,7 +44,7 @@ const LandingPage = () => {
   ];
 
   const testimonials = [
-    { name: 'John Ssebulime', role: 'Student Intern', text: 'ILES made it so easy to track my internship progress. My supervisors could see my work instantly!', avatar: '👩🏾‍💻' },
+    { name: 'John Ssebulime', role: 'Student Intern', text: 'ILES made it so easy to track my internship progress. My supervisors can see my work instantly', avatar: '👩🏾‍💻' },
     { name: 'Dr. Paul Okello', role: 'Academic Supervisor', text: 'I can now manage all my students\' logs in one place. The approval workflow is seamless.', avatar: '👨🏾‍🏫' },
     { name: 'Tumwine Robert', role: 'Workplace Supervisor', text: 'Reviewing logs and giving feedback has never been this straightforward. Highly recommended.', avatar: '👨🏾‍💼' },
   ];
